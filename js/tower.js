@@ -3,7 +3,7 @@ function tower(){
   this.range = 2;//ein array aus den feldern, welche die reichweite sind
   this.min = 2;
   this.sprite = game.add.sprite(this.position[0] * 32, this.position[1] * 32, 'mushroom');
-  this.dmg = 50;
+  this.dmg = 10;
   this.enemy = null;
 
   //für den cooldown wichtig
@@ -14,7 +14,7 @@ function tower(){
     //ab hier gehts ab
     this.findnearst(); //setzt this.enemy auf den nähsten
     this.enemyoutofrange(); //und wenn er außerhalb ist, dann wird er gekillt
-    //this.attack();
+    this.attack();
   }
 
   this.findnearst = function(){//diese methode funktioniert noch nicht ganz so wie ichs will
@@ -72,8 +72,7 @@ function tower(){
       //  console.log(this.enemy.health);
       if(this.enemy.health <= 0){
         var temp = enemys.indexOf(this.enemy);
-
-        killminion(temp);
+        this.enemy = null;
         console.log(enemys);
 
 

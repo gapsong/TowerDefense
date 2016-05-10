@@ -56,8 +56,6 @@
     //Das ist einfach nur ein testminion
     enemys.push(new minion("1"));
     setTimeout(function(){enemys.push(new minion("2"))}, 1500);
-    /*setTimeout(function(){console.log(enemys)}, 1500);
-    setTimeout(function(){console.log(enemys)}, 3000);*/
 
 
     turret = new tower();
@@ -70,13 +68,21 @@
     }
 
     turret.doit();//einfach die turrets durch die iteriert wird
+    console.log(enemys);
+    killminion();
+  }
+
+  function killminion(){//killt minion
+    for(var i = 0; i < enemys.length ; i++){
+      if(enemys[i].health <= 0){
+        enemys[i].sprite.kill();
+        enemys.splice(i,1);
+        console.log(enemys);
+      }
+    }
 
   }
 
-  function killminion(i){//killt minion
-    enemys[i].sprite.kill();
-    enemys.splice(1,i);
-  }
   </script>
 </body>
 </html>
