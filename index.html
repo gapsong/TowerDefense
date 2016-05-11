@@ -57,8 +57,9 @@
     enemys.push(new minion("1"));
     setTimeout(function(){enemys.push(new minion("2"))}, 1500);
 
-
-    turret = new tower();
+    turret = new tower(3,3);
+    turret2 = new tower(4,3);
+    turret3 = new tower (5,3);
   }
 
   function update(){
@@ -68,6 +69,8 @@
     }
 
     turret.doit();//einfach die turrets durch die iteriert wird
+    turret2.doit();
+    turret3.doit();
     console.log(enemys);
     killminion();
   }

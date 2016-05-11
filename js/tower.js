@@ -1,5 +1,5 @@
-function tower(){
-  this.position = new Array(3, 3);//Arrayposition
+function tower(x,y){
+  this.position = new Array(x,y);//Arrayposition
   this.range = 2;//ein array aus den feldern, welche die reichweite sind
   this.min = 2;
   this.sprite = game.add.sprite(this.position[0] * 32, this.position[1] * 32, 'mushroom');
