@@ -5,6 +5,7 @@ function tower(x,y){
   this.sprite = game.add.sprite(this.position[0] * 32, this.position[1] * 32, 'mushroom');
   this.dmg = 10;
   this.enemy = null;
+  this.speed = 500;
 
   //für den cooldown wichtig
   this.cooldowncounter = 1000;//das ist eine sekunde cooldown
@@ -65,11 +66,11 @@ function tower(x,y){
     var n = d.getTime();
 
     if(this.enemy != null && n - this.currenttime > this.cooldowncounter){
-      //    console.log(this.enemy.name);
+      //console.log(this.enemy.name);
 
       this.currenttime = n;
       this.enemy.health -= this.dmg;
-      //  console.log(this.enemy.health);
+      //console.log(this.enemy.health);
       if(this.enemy.health <= 0){
         var temp = enemys.indexOf(this.enemy);
         this.enemy = null;
@@ -79,4 +80,13 @@ function tower(x,y){
       }
     }
   }
+
+  this.movetopointerbullet = function () {
+        this.pointer = incPos;
+        var dx = this.pointer[0] - this.bullet.position[0];
+        var dy = this.pointer[1] - this.bullet.position[1];
+        var winkel = Math.atan2(dy, dx);
+        this.bullet.velocity = [speed * Math.cos(winkel), speed * Math.sin(winkel)];
+    }
+
 }
