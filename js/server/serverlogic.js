@@ -6,5 +6,5 @@ exports.logic = function (){
   });
   console.log("Serverlogik startet");
 
-  serverminion.minion(world);
+  serverminion.minion(world, 10, 10);//world 1 2 
 }
