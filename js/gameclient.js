@@ -8,6 +8,7 @@ var level;
 var startpos = new Array(2,2);
 var enemys = new Array();
 var towers = new Array();
+var tilesize = 32;
 
 function preload(){
   game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
