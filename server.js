@@ -3,11 +3,15 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var p2 = require('p2');
+var serverlogic = require('./js/server/serverlogic');
 
-app.use('/js', express.static(__dirname + '/js'));
+
+app.use('/js/client', express.static(__dirname + '/js/client'));
 app.use('/assets', express.static(__dirname + '/assets'));
 
 app.get('/', function(req, res){
+  serverlogic.minions();
   res.sendFile(__dirname + '/index.html');
 });
 
