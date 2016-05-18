@@ -1,4 +1,4 @@
-var game = new Phaser.Game(480, 480, Phaser.AUTO, null, {
+var game = new Phaser.Game(1200, 600, Phaser.AUTO, '', {
   preload: preload, create: create, update: update
 });
 
@@ -11,9 +11,9 @@ var towers = new Array();
 var tilesize = 32;
 
 function preload(){
-  game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+  game.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
   game.scale.pageAlignHorizontally = true;
-  game.scale.pageAlignVertically = true;
+  //game.scale.pageAlignVertically = true;
   game.stage.backgroundColor = '#fee';
   game.load.tilemap('karte', 'assets/super_mario.json', null, Phaser.Tilemap.TILED_JSON);
   game.load.image('tiles', 'assets/super_mario.png');
@@ -53,7 +53,6 @@ function update(){
   turret.doit();//einfach die turrets durch die iteriert wird
   turret2.doit();
   turret3.doit();
-  console.log(enemys);
   killminion();
 }
 

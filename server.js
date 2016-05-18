@@ -11,6 +11,7 @@ app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
+
 //Make local files accessible to html get requests
 
 var server = app.listen(3000, function () {

@@ -8,8 +8,6 @@ function minion (a){
   this.name = a;
 
 
-
-
   this.move = function(){
     if((this.sprite.x + this.sprite.y) % tilesize == 0){
       this.richtung = level[this.position[0]][this.position[1]];
@@ -17,6 +15,7 @@ function minion (a){
     }
     this.bewegen();
   }
+
 
   this.richtungswechsel = function(){
     if(this.richtung == 1)
@@ -31,6 +30,7 @@ function minion (a){
     if(this.richtung == 4)
     this.position[1]--;
   }
+
 
   this.bewegen = function(){
     var temp = 1;//geschwindigkeit

@@ -1,7 +1,7 @@
 function tower(x,y){
   console.log("tower");
   this.position = new Array(x,y);//Arrayposition
-  this.range = 200;//ein array aus den feldern, welche die reichweite sind
+  this.range = 90;//ein array aus den feldern, welche die reichweite sind
   this.min = 2;
   this.sprite = game.add.sprite(this.position[0] * tilesize, this.position[1] * tilesize, 'mushroom');
   this.dmg = 10;
@@ -12,8 +12,8 @@ function tower(x,y){
 
   this.doit = function(){//man iteriert durch die range
     //ab hier gehts ab
-    this.findnearest(); //setzt this.enemy auf den nähsten
-    this.enemyoutofrange(); //und wenn er außerhalb ist, dann wird er gekillt
+    this.findnearest2(); //setzt this.enemy auf den nähsten
+    this.enemyoutofrange2(); //und wenn er außerhalb ist, dann wird er gekillt
     this.attack();
   }
 
@@ -41,55 +41,72 @@ function tower(x,y){
 
   this.findnearest2 = function(){
     if(this.enemy == null){//falls noch kein enemy gefunden wurde
-      this.min = this.range;//zurücksetzen von der range
-
+      this.min = this.range;//zurücksetzen von der range<
       for(var i = 0 ; i < enemys.length ; i++){
-        //bedingung
-
+        //Satz des Pythagoras
+        var temp = enemys[i].sprite;
+        var temptower = this.sprite;
+        var deltaX = temp.x - temptower.x;
+        var deltaY = temp.y - temptower.y;
+        var c = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));//Pythagoras
+        console.log(i + " index " + c);
+        if(c < this.min && c < this.range){
+          this.enemy = enemys[i];
+        }
       }
-
-    if(this.enemy != null)
-    console.log(this.enemy.name);
-  }
-}
-this.enemyoutofrange = function(){
-  if(this.enemy != null){
-    var temp = this.enemy.position[0] + this.enemy.position[1];//Werte vom enemyposition
-    var temp2 = this.position[0] + this.position[1];
-    if(this.betrag(temp - temp2) >= this.range ){//Wenn gegner außerhalb der range ist, dann soll ein neuer gesucht werden
-      this.enemy = null;//gegener zurücksetzen
-      //console.log("out of range");
     }
   }
-}
 
-this.betrag = function (x){
-  if (x < 0){
-    return -x;
-  } else {
-    return x;
-  }
-}
-
-this.attack = function () {
-  var d = new Date();
-  var n = d.getTime();
-
-  if(this.enemy != null && n - this.currenttime > this.cooldowncounter){
-    this.currenttime = n;
-    this.enemy.health -= this.dmg;
-    if(this.enemy.health <= 0){
-      var temp = enemys.indexOf(this.enemy);
-      this.enemy = null;
+  this.enemyoutofrange = function(){
+    if(this.enemy != null){
+      var temp = this.enemy.position[0] + this.enemy.position[1];//Werte vom enemyposition
+      var temp2 = this.position[0] + this.position[1];
+      if(this.betrag(temp - temp2) >= this.range ){//Wenn gegner außerhalb der range ist, dann soll ein neuer gesucht werden
+        this.enemy = null;//gegener zurücksetzen
+        //console.log("out of range");
+      }
     }
   }
-}
 
-this.movetopointerbullet = function () {
-  this.pointer = incPos;
-  var dx = this.pointer[0] - this.bullet.position[0];
-  var dy = this.pointer[1] - this.bullet.position[1];
-  var winkel = Math.atan2(dy, dx);
-  this.bullet.velocity = [speed * Math.cos(winkel), speed * Math.sin(winkel)];
-}
+  this.enemyoutofrange2 = function(){
+    if(this.enemy != null){
+      var temp = this.enemy.sprite.x + this.enemy.sprite.y;//Werte vom enemyposition
+      var temp2 = this.sprite.x + this.sprite.y;
+      if(this.betrag(temp - temp2) >= this.range ){//Wenn gegner außerhalb der range ist, dann soll ein neuer gesucht werden
+        this.enemy = null;//gegener zurücksetzen
+        //console.log("out of range");
+      }
+    }
+  }
+
+
+  this.betrag = function (x){
+    if (x < 0){
+      return -x;
+    } else {
+      return x;
+    }
+  }
+
+  this.attack = function () {
+    var d = new Date();
+    var n = d.getTime();
+
+    if(this.enemy != null && n - this.currenttime > this.cooldowncounter){
+      this.currenttime = n;
+      this.enemy.health -= this.dmg;
+      if(this.enemy.health <= 0){
+        var temp = enemys.indexOf(this.enemy);
+        this.enemy = null;
+      }
+    }
+  }
+
+  this.movetopointerbullet = function () {
+    this.pointer = incPos;
+    var dx = this.pointer[0] - this.bullet.position[0];
+    var dy = this.pointer[1] - this.bullet.position[1];
+    var winkel = Math.atan2(dy, dx);
+    this.bullet.velocity = [speed * Math.cos(winkel), speed * Math.sin(winkel)];
+  }
 }
