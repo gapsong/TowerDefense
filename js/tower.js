@@ -1,4 +1,5 @@
 function tower(x,y){
+  console.log("tower");
   this.position = new Array(x,y);//Arrayposition
   this.range = 2;//ein array aus den feldern, welche die reichweite sind
   this.min = 2;
