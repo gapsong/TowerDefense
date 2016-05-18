@@ -10,8 +10,10 @@ var serverlogic = require('./js/server/serverlogic');
 app.use('/js/client', express.static(__dirname + '/js/client'));
 app.use('/assets', express.static(__dirname + '/assets'));
 
+
+serverlogic.logic();//Serverlogik diese Methode startet die Logik
+
 app.get('/', function(req, res){
-  serverlogic.minions();
   res.sendFile(__dirname + '/index.html');
 });
 
