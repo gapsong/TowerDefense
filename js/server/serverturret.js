@@ -1,4 +1,4 @@
-exports.turret = function (world){
+exports.turret = function(world, x, y) {
   var p2 = require('../../node_modules/p2');
   /////////////////////////////////////////////////////////////
   //bullets
@@ -9,12 +9,15 @@ exports.turret = function (world){
     position: [-20, -20],
     damping: 0
   });
+  this.position = new Array(x, y);
 
-  circleshapebullet = new p2.Circle({radius: 10});
+  circleshapebullet = new p2.Circle({
+    radius: 10
+  });
   this.bullet.addShape(circleshapebullet);
   world.addBody(this.bullet);
 
-  this.movetopointerbullet = function (speed, incPos) {
+  this.movetopointerbullet = function(speed, incPos) {
     this.pointer = incPos;
     var dx = this.pointer[0] - this.bullet.position[0];
     var dy = this.pointer[1] - this.bullet.position[1];

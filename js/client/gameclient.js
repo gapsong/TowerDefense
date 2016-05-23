@@ -1,21 +1,23 @@
 var socket = io();
-socket.on('update' , function(inc){
+socket.on('update', function(inc) {
   //console.log(inc);
 });
 
 var game = new Phaser.Game(1200, 600, Phaser.AUTO, '', {
-  preload: preload, create: create, update: update
+  preload: preload,
+  create: create,
+  update: update
 });
 
 var map;
 var layer;
 var level;
-var startpos = new Array(2,2);
+var startpos = new Array(2, 2);
 var enemys = new Array();
 var towers = new Array();
 var tilesize = 32;
 
-function preload(){
+function preload() {
   game.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
   game.scale.pageAlignHorizontally = true;
   //game.scale.pageAlignVertically = true;
@@ -35,8 +37,8 @@ function create() {
   //  Creates a layer from the World1 layer in the map data.
   //  A Layer is effectively like a Phaser.Sprite, so is added to the display list.
   layer = map.createLayer('World1');
-  layer.resizeWorld();// This resizes the game world to match the layer dimensions
-  var levelObj = new karte();//karte named leveObj ref
+  layer.resizeWorld(); // This resizes the game world to match the layer dimensions
+  var levelObj = new karte(); //karte named leveObj ref
   //map eingelesen als Array darstellen
   level = levelObj.maplesen();
 
@@ -48,24 +50,24 @@ function create() {
   //////////////////////////////////////////////////7
   //DECLARATION
   //////////////////////////////////////////////////7
-  enemys.push(new minion());//create minion
-  turret = new tower(3,3);
+  enemys.push(new minion()); //create minion
+  turret = new tower(3, 3);
 }
 
-function update(){
+function update() {
   //sprite bewegung
-  for(var k = 0 ; k < enemys.length ; k++){
+  for (var k = 0; k < enemys.length; k++) {
     enemys[k].move();
   }
-  turret.doit();//einfach die turrets durch die iteriert wird
+  turret.doit(); //einfach die turrets durch die iteriert wird
   killminion();
 }
 
-function killminion(){//killt minion
-  for(var i = 0; i < enemys.length ; i++){
-    if(enemys[i].health <= 0){
+function killminion() { //killt minion
+  for (var i = 0; i < enemys.length; i++) {
+    if (enemys[i].health <= 0) {
       enemys[i].sprite.kill();
-      enemys.splice(i,1);
+      enemys.splice(i, 1);
       console.log(enemys);
     }
   }
