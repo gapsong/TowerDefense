@@ -5,12 +5,24 @@ exports.logic = function (io){
   var gameloop = require('node-gameloop');
   var serverkarte = require('./serverkarte');
 
+  io.on('connection', function(socket){
+    console.log("connected");
+    socket.on('spawn_minion', function(){
+      console.log("minion got spawnt")
+    });
+  });
+
   var world = new p2.World({
     gravity: [0, 0]
   });
-  console.log("Serverlogik startet");
+  var startpos = new Array(2,2);
+
   serverkarte.karte();
-  console.log(f);
+  console.log(smap);
+
+  //////////////////////////////////////////////
+  //GAMELOOP
+  //////////////////////////////////////////////
 
   var timeStep = 1 / 60; // seconds
   setInterval(function () {
@@ -18,10 +30,6 @@ exports.logic = function (io){
     io.emit('update', 1);
   }, 1000 * timeStep);
 
-  io.on('connection', function(socket){
-    console.log("connected");
-    //socket.on('')
-  });
 
   serverminion.minion(world, 10, 10);//world, x, y
   serverturret.turret(world);

@@ -5,11 +5,11 @@ exports.karte = function(){
   width = karteJSON.layers[0].width;
   karte = karteJSON.layers[0].data;
   //console.log(karte);
-  f = new Array();
+  smap = new Array();
   for (i = 0 ; i < width ; i ++) {
-    f[i] = new Array();
+    smap[i] = new Array();
     for (j = 0 ; j < height ; j++){
-      f[i][j] = karte[i * width + j];
+      smap[i][j] = karte[i * width + j];
     }
   }
 }
