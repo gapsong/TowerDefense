@@ -10,6 +10,7 @@ exports.logic = function (io){
   });
   console.log("Serverlogik startet");
   serverkarte.karte();
+  console.log(f);
 
   var timeStep = 1 / 60; // seconds
   setInterval(function () {

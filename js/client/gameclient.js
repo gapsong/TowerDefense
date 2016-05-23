@@ -39,6 +39,8 @@ function create() {
   var levelObj = new karte();//karte named leveObj ref
   //map eingelesen als Array darstellen
   level = levelObj.maplesen();
+
+  //Der Rote kreis aka the range
   var graphics = game.add.graphics(0, 0);
   graphics.beginFill(0xFF0000, 1);
   graphics.drawCircle(3.5 * tilesize, 3.5 * tilesize, 90);
