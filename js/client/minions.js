@@ -1,12 +1,14 @@
-function minion (a){
+function minion (){
   this.sprite = game.add.sprite(startpos[0] * tilesize, startpos[1] * tilesize, 'mushroom');
   //this.game = game;
   //this.sprite.anchor.setTo(0.5);
   this.position = new Array(startpos[0], startpos[1]);
   this.richtung = level[this.position[0]][this.position[1]];
   this.health = 100;
-  this.name = a;
 
+  this.doit = function(){
+      console.log("fsdf");
+  }
 
   this.move = function(){
     if((this.sprite.x + this.sprite.y) % tilesize == 0){
@@ -15,7 +17,6 @@ function minion (a){
     }
     this.bewegen();
   }
-
 
   this.richtungswechsel = function(){
     if(this.richtung == 1)
@@ -30,7 +31,6 @@ function minion (a){
     if(this.richtung == 4)
     this.position[1]--;
   }
-
 
   this.bewegen = function(){
     var temp = 1;//geschwindigkeit

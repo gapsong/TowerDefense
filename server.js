@@ -10,17 +10,20 @@ var serverlogic = require('./js/server/serverlogic');
 app.use('/js/client', express.static(__dirname + '/js/client'));
 app.use('/assets', express.static(__dirname + '/assets'));
 
-
-serverlogic.logic();//Serverlogik diese Methode startet die Logik
-
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
+serverlogic.logic(io);//Serverlogik diese Methode startet die Logik. Hiermit übergebe ich "io" als parameter
+//Socket io
+http.listen(3000, function () {
+  console.log('listening on *:3000');
+});
 
+/*
 //Make local files accessible to html get requests
-
 var server = app.listen(3000, function () {
   var host = server.address().address
   var port = server.address().port
 });
+*/

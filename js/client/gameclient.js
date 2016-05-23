@@ -1,3 +1,8 @@
+var socket = io();
+socket.on('update' , function(inc){
+  //console.log(inc);
+});
+
 var game = new Phaser.Game(1200, 600, Phaser.AUTO, '', {
   preload: preload, create: create, update: update
 });
@@ -37,12 +42,11 @@ function create() {
   var graphics = game.add.graphics(0, 0);
   graphics.beginFill(0xFF0000, 1);
   graphics.drawCircle(3.5 * tilesize, 3.5 * tilesize, 90);
-  game.physics.startSystem(Phaser.Physics.P2JS);
 
   //////////////////////////////////////////////////7
   //DECLARATION
   //////////////////////////////////////////////////7
-  enemys.push(new minion("1"));//create minion
+  enemys.push(new minion());//create minion
   turret = new tower(3,3);
 }
 
@@ -51,7 +55,6 @@ function update(){
   for(var k = 0 ; k < enemys.length ; k++){
     enemys[k].move();
   }
-
   turret.doit();//einfach die turrets durch die iteriert wird
   killminion();
 }

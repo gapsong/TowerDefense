@@ -21,7 +21,6 @@ function karte (){
 
       }
     }
-
     return f;
   }
 }

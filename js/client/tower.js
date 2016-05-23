@@ -1,5 +1,4 @@
 function tower(x,y){
-  console.log("tower");
   this.position = new Array(x,y);//Arrayposition
   this.range = 50;//ein array aus den feldern, welche die reichweite sind
   this.min = 2;
@@ -9,7 +8,7 @@ function tower(x,y){
   this.speed = 500;
   this.cooldowncounter = 1000;//das ist eine sekunde cooldown
   this.currenttime = 0; //aktuelle zeit
-  
+
 
   this.doit = function(){//man iteriert durch die range
     //ab hier gehts ab
@@ -80,7 +79,6 @@ function tower(x,y){
       }
     }
   }
-
 
   this.betrag = function (x){
     if (x < 0){
