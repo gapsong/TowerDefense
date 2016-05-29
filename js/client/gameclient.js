@@ -1,6 +1,8 @@
 var socket = io();
+var par_inc;
 socket.on('update', function(inc) {
-  //console.log(inc);
+  console.log(inc);
+  par_inc = inc;
 });
 
 var game = new Phaser.Game(1200, 600, Phaser.AUTO, '', {
@@ -43,10 +45,10 @@ function create() {
   level = levelObj.maplesen();
 
   //Der Rote kreis aka the range
-  var graphics = game.add.graphics(0, 0);
+  /*var graphics = game.add.graphics(0, 0);
   graphics.beginFill(0xFF0000, 1);
   graphics.drawCircle(3.5 * tilesize, 3.5 * tilesize, 90);
-
+*/
   //////////////////////////////////////////////////7
   //DECLARATION
   //////////////////////////////////////////////////7
@@ -57,10 +59,10 @@ function create() {
 function update() {
   //sprite bewegung
   for (var k = 0; k < enemys.length; k++) {
-    enemys[k].move();
+    enemys[k].doit(par_inc);
   }
-  turret.doit(); //einfach die turrets durch die iteriert wird
-  killminion();
+  //turret.doit(); //einfach die turrets durch die iteriert wird
+  //killminion();
 }
 
 function killminion() { //killt minion

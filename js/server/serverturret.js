@@ -6,11 +6,10 @@ exports.turret = function(world, x, y) {
   this.bullet = new p2.Body({
     mass: 5,
     velocity: [0, 0],
-    position: [-20, -20],
+    position: [x, y],
     damping: 0
   });
   this.position = new Array(x, y);
-
   circleshapebullet = new p2.Circle({
     radius: 10
   });
