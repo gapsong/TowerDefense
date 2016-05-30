@@ -7,19 +7,19 @@ exports.minion = function(world, x, y) {
 
     this.body = new p2.Body({
         mass: 5,
-        velocity: [0, 0],
+        velocity: [50, 0],
         position: [x * tiledsize, y * tiledsize],
         damping: 0
     });
     this.richtung = smap[x][y];
     circleShape = new p2.Circle({
-        radius: 10
+        radius: tiledsize / 2
     });
-    circleShape.sensor = false;
+    circleShape.sensor = true;
     this.body.addShape(circleShape);
     world.addBody(this.body);
 
-    this.doit2 = function(){
+    this.doit2 = function() {
 
     }
 
@@ -37,22 +37,43 @@ exports.minion = function(world, x, y) {
 
     this.move = function() {
         switch (this.richtung) {
-            case 15:
+            case 15: //rechts
                 this.body.velocity[0] = speed;
                 this.body.velocity[1] = 0;
                 break;
-            case 14:
+            case 14: //runter
                 this.body.velocity[0] = 0;
                 this.body.velocity[1] = speed;
                 break;
-            case 4:
+            case 4: //hoch
                 this.body.velocity[0] = 0;
                 this.body.velocity[1] = -speed;
                 break;
-            case 3:
+            case 3: //links
                 this.body.velocity[0] = -speed;
                 this.body.velocity[1] = 0;
                 break;
         }
+    }
+
+    this.move2 = function(richtung) {
+      switch (richtung) {
+          case 17: //rechts
+              this.body.velocity[0] = speed;
+              this.body.velocity[1] = 0;
+              break;
+          case 16: //runter
+              this.body.velocity[0] = 0;
+              this.body.velocity[1] = speed;
+              break;
+          case 6: //hoch
+              this.body.velocity[0] = 0;
+              this.body.velocity[1] = -speed;
+              break;
+          case 5: //links
+              this.body.velocity[0] = -speed;
+              this.body.velocity[1] = 0;
+              break;
+      }
     }
 }
