@@ -19,6 +19,10 @@ exports.minion = function(world, x, y) {
     this.body.addShape(circleShape);
     world.addBody(this.body);
 
+    this.doit2 = function(){
+
+    }
+
     this.doit = function() {
         this.changedir();
         this.move();
