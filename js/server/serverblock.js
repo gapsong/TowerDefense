@@ -1,4 +1,4 @@
-exports.richtungsblock = function(world, x, y, fieldnum) {
+exports.richtungsblock = function(world, x, y, fieldnum) { //fieldnum ist die ID des Feldes, damit man weiß in welche richtung es geht
     var settings = require('../settings.json');
     var p2 = require('../../node_modules/p2');
     var tiledsize = settings.tiledsize;

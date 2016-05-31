@@ -1,6 +1,7 @@
 var socket = io();
 var par_inc;
 socket.on('update', function(inc) {
+    console.log(inc);
     par_inc = inc;
 });
 
@@ -38,9 +39,9 @@ function create() {
     var levelObj = new karte(); //karte named leveObj ref
     level = levelObj.maplesen();
 
-    //////////////////////////////////////////////////7
+    //////////////////////////////////////////////////
     //DECLARATION
-    //////////////////////////////////////////////////7
+    //////////////////////////////////////////////////
     enemys.push(new minion()); //create minion
     turret = new tower(3, 3);
 }

@@ -15,14 +15,13 @@ exports.logic = function(io) {
     var world = new p2.World({
         gravity: [0, 0]
     });
-    var startpos = new Array(2, 2);
+    var startpos = new Array(3, 2);
     var minions = new Array();
     var turrets = new Array();
     serverkarte.karte(world);
     turrets.push(new serverturret.turret(world, 2 * tiledsize, 3 * tiledsize));
     minions.push(new serverminion.minion(world, startpos[0], startpos[1]));
-    console.log(minions[0].body.position);
-    console.log(minions[0].richtung);
+
     //////////////////////////////////////////////
     //GAMELOOP
     //////////////////////////////////////////////
@@ -36,13 +35,11 @@ exports.logic = function(io) {
     }, 1000 * timeStep);
 
     world.on("beginContact", function(event) {
-        if (event.bodyA === minions[0].body) {
-            console.log("kollision");
-            minions[0].move2(event.bodyB.id);
-        }
         if (event.bodyB === minions[0].body) {
-            console.log("eventB");
             minions[0].move2(event.bodyA.id);
+        }
+        if (event.bodyA === minions[0].body) {
+            minions[0].move2(event.bodyB.id);
         }
     });
 }

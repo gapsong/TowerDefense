@@ -7,7 +7,7 @@ exports.minion = function(world, x, y) {
 
     this.body = new p2.Body({
         mass: 5,
-        velocity: [50, 0],
+        velocity: [0, 50],
         position: [x * tiledsize, y * tiledsize],
         damping: 0
     });
@@ -20,7 +20,6 @@ exports.minion = function(world, x, y) {
     world.addBody(this.body);
 
     this.doit2 = function() {
-
     }
 
     this.doit = function() {
