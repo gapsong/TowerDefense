@@ -17,7 +17,7 @@ var startpos = new Array(2, 2);
 var enemys = new Array();
 var towers = new Array();
 var tilesize = 32;
-var tween;
+
 
 function preload() {
     game.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
@@ -37,14 +37,6 @@ function create() {
     layer.resizeWorld(); // This resizes the game world to match the layer dimensions
     var levelObj = new karte(); //karte named leveObj ref
     level = levelObj.maplesen();
-
-    tween = game.add.tween(minions[0]).to({
-        x: [w, w, 0, 0],
-        y: [0, h, h, 0]
-    }, 4000, "Sine.easeInOut", true, -1, false);
-    tween.onLoop.add(changeMethod(), this);
-    /////////////////////////////////////
-
 
     //////////////////////////////////////////////////7
     //DECLARATION
@@ -69,22 +61,4 @@ function killminion() { //killt minion
             enemys.splice(i, 1);
         }
     }
-}
-
-function changeMethod() {
-
-    method++;
-
-    if (method === 1) {
-        tween.interpolation(Phaser.Math.bezierInterpolation);
-        text.text = "Bezier Interpolation";
-    } else if (method === 2) {
-        tween.interpolation(Phaser.Math.catmullRomInterpolation);
-        text.text = "CatmullRom Interpolation";
-    } else if (method === 3) {
-        method = 0;
-        tween.interpolation(Phaser.Math.linearInterpolation);
-        text.text = "Linear Interpolation";
-    }
-
 }
