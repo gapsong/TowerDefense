@@ -1,7 +1,6 @@
 var socket = io();
 var par_inc;
 socket.on('update', function(inc) {
-    console.log(inc);
     par_inc = inc;
 });
 

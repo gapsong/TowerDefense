@@ -7,7 +7,6 @@ function minion() {
     this.health = 100;
 
     this.doit = function(temp) {
-        console.log("fsdf");
         this.sprite.x = temp[0];
         this.sprite.y = temp[1];
     }
