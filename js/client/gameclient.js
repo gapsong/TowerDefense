@@ -27,6 +27,8 @@ function preload() {
     game.load.tilemap('karte', 'assets/super_mario.json', null, Phaser.Tilemap.TILED_JSON);
     game.load.image('tiles', 'assets/super_mario.png');
     game.load.image('mushroom', 'assets/sprites/add.png');
+    game.load.image('bullet', 'assets/sprites/bullet.png');
+
 }
 
 function create() {

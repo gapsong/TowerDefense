@@ -19,7 +19,7 @@ exports.logic = function(io) {
     var minions = new Array();
     var turrets = new Array();
     serverkarte.karte(world);
-    turrets.push(new serverturret.turret(world, 2 * tiledsize, 3 * tiledsize));
+    turrets.push(new serverturret.turret(world, 2, 3));
     minions.push(new serverminion.minion(world, startpos[0], startpos[1]));
 
     //////////////////////////////////////////////

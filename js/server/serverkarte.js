@@ -17,5 +17,5 @@ exports.karte = function(world) {
             }
         }
     }
-    console.log(smap);
+    //console.log(smap);//gibt die karte aus
 }
