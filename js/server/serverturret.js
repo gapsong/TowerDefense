@@ -2,7 +2,9 @@ exports.turret = function(world, x, y) {
     var p2 = require('../../node_modules/p2');
     var settings = require('../settings.json');
     var tiledsize = settings.tiledsize;
-
+    this.enemy = null;
+    this.range = settings.towerrange;
+    this.min;
     /////////////////////////////////////////////////////////////
     //bullets
     /////////////////////////////////////////////////////////////
@@ -19,7 +21,28 @@ exports.turret = function(world, x, y) {
     this.bullet.addShape(circleshapebullet);
     world.addBody(this.bullet);
 
-    
+    this.findnearest = function(minions) {
+        if (this.enemy == null) { //falls noch kein enemy gefunden wurde
+            this.min = this.range; //zurücksetzen von der range<
+            for (var i = 0; i < minions.length; i++) {
+                //Satz des Pythagoras
+                var temp = minions[i].body;
+                var temptower = this.bullet;
+                var deltaX = this.betrag(temp.position[0] - temptower.position[1]);
+                var deltaY = this.betrag(temp.position[0] - temptower.position[1]);
+                var c = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2)); //Pythagoras
+                if (c < this.min && c < this.range) {
+                    console.log(c);
+                    this.enemy = minions[i];
+                    this.min = c;
+                }
+            }
+            console.log("gefunden");
+        }
+        else{
+          this.movetopointerbullet(500, this.enemy.body.position);
+        }
+    }
 
     this.movetopointerbullet = function(speed, incPos) {
         this.pointer = incPos;
@@ -28,4 +51,12 @@ exports.turret = function(world, x, y) {
         var winkel = Math.atan2(dy, dx);
         this.bullet.velocity = [speed * Math.cos(winkel), speed * Math.sin(winkel)];
     }
+
+    this.betrag = function(x) {
+     if (x < 0) {
+         return -x;
+     } else {
+         return x;
+     }
+ }
 }

@@ -1,4 +1,5 @@
 {
   "tiledsize": 32,
-  "speed":100
+  "speed":100,
+  "towerrange":200
 }

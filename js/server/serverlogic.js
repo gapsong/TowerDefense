@@ -19,8 +19,8 @@ exports.logic = function(io) {
     var minions = new Array();
     var turrets = new Array();
     serverkarte.karte(world);
-    turrets.push(new serverturret.turret(world, 2, 3));
     minions.push(new serverminion.minion(world, startpos[0], startpos[1]));
+    turrets.push(new serverturret.turret(world, 2, 3));
 
     //////////////////////////////////////////////
     //GAMELOOP
@@ -31,7 +31,9 @@ exports.logic = function(io) {
         world.step(timeStep);
         //console.log(minions[0].body.position);
         minions[0].doit2();
-        io.emit('update', minions[0].body.position);
+        turrets[0].findnearest(minions);
+        io.emit('update', minions[0].body.position, turrets[0].bullet.position);
+
     }, 1000 * timeStep);
 
     world.on("beginContact", function(event) {

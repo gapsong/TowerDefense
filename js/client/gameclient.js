@@ -1,7 +1,8 @@
 var socket = io();
-var par_inc;
-socket.on('update', function(inc) {
+var par_inc, par_inc2;
+socket.on('update', function(inc, inc2) {
     par_inc = inc;
+    par_inc2 = inc2;
 });
 
 var game = new Phaser.Game(1200, 600, Phaser.AUTO, '', {
@@ -52,7 +53,7 @@ function update() {
     for (var k = 0; k < enemys.length; k++) {
         enemys[k].doit(par_inc);
     }
-    //turret.doit(); //einfach die turrets durch die iteriert wird
+    turret.doit(par_inc2); //einfach die turrets durch die iteriert wird
     //killminion();
 }
 
