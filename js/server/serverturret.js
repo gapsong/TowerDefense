@@ -32,18 +32,30 @@ exports.turret = function(world, x, y) {
                 var deltaY = this.betrag(temp.position[0] - temptower.position[1]);
                 var c = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2)); //Pythagoras
                 if (c < this.min && c < this.range) {
-                    console.log(c);
+                    console.log("in");
                     this.enemy = minions[i];
                     this.min = c;
                 }
             }
-            console.log("gefunden");
-        }
-        else{
-          this.movetopointerbullet(500, this.enemy.body.position);
         }
     }
 
+    this.doit = function(minions) {
+        this.findnearest(minions);
+        this.enemyoutofrange();
+    }
+
+    this.enemyoutofrange = function() {
+        if (this.enemy != null) {
+            var deltaX = this.betrag(this.enemy.body.position[0] - this.bullet.position[0]); //Werte vom enemyposition
+            var deltaY = this.betrag(this.enemy.body.position[1] - this.bullet.position[1]);
+            var c = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2)); //Pythagoras
+            if (c >= this.range) { //Wenn gegner außerhalb der range ist, dann soll ein neuer gesucht werden
+                this.enemy = null; //gegener zurücksetzen
+                console.log("out");
+            }
+        }
+    }
     this.movetopointerbullet = function(speed, incPos) {
         this.pointer = incPos;
         var dx = this.pointer[0] - this.bullet.position[0];
@@ -53,10 +65,10 @@ exports.turret = function(world, x, y) {
     }
 
     this.betrag = function(x) {
-     if (x < 0) {
-         return -x;
-     } else {
-         return x;
-     }
- }
+        if (x < 0) {
+            return -x;
+        } else {
+            return x;
+        }
+    }
 }

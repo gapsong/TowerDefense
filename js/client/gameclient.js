@@ -41,11 +41,15 @@ function create() {
     var levelObj = new karte(); //karte named leveObj ref
     level = levelObj.maplesen();
 
+
+    var graphics = game.add.graphics(0, 0);
+    graphics.beginFill(0xFF0000, 1);
+    graphics.drawCircle(4.5 * tilesize, 5.5 * tilesize, 50);
     //////////////////////////////////////////////////
     //DECLARATION
     //////////////////////////////////////////////////
     enemys.push(new minion()); //create minion
-    turret = new tower(3, 3);
+    turret = new tower(4, 5);
 }
 
 function update() {
