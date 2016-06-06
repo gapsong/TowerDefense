@@ -1,18 +1,38 @@
-var gulp        = require('gulp');
-var browserSync = require('browser-sync').create();
-var reload      = browserSync.reload;
+var gulp = require('gulp');
+var browserify = require('gulp-browserify');
+var concat = require('gulp-concat');
+var nodemon = require('gulp-nodemon');
 
-// Save a reference to the `reload` method
+var dirname = '/';
 
-// Watch scss AND html files, doing different things with each.
-gulp.task('serve', function () {
+var paths = {
+    apps: ['src/apps/desktop/main.js'],
+    dist: 'src/public/dist'
+}
 
-    // Serve files from the root of this project
-    browserSync.init({
-        server: {
-            baseDir: "./"
-        }
-    });
+gulp.task('develop', function() {
+    nodemon({
+            script: 'server.js',
+            ext: 'html js',
+            ignore: paths.dist + '/**'
+        })
+        .on('start', ['browserify'])
+        .on('restart', ['browserify'], function() {
+            console.log('restarted!');
+        });
+});
 
-    gulp.watch("*.js").on("change", reload);
+gulp.task('browserify', function() {
+    gulp.src(paths.apps)
+        .pipe(browserify({
+            transform: 'reactify'
+        }))
+        .pipe(concat('main.js'))
+        .pipe(gulp.dest(paths.dist + '/js'));
+});
+
+gulp.task('default', ['develop']);
+
+gulp.task('watch', function() {
+    gulp.watch('src/**/*.*', ['default']);
 });
