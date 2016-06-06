@@ -11,8 +11,7 @@ exports.minion = function(world, x, y) {
         position: [x * tiledsize, y * tiledsize],
         damping: 0
     });
-    this.richtung = smap[x][y];
-    circleShape = new p2.Circle({
+    circleShape = new p2.Circle({//circleShape refactor
         radius: tiledsize / 2
     });
     circleShape.sensor = true;

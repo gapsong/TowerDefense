@@ -1,7 +1,7 @@
 {
     "tiledsize": 32,
     "speed": 100,
-    "towerrange": 50,
+    "towerrange": 1,
     "startposition": {
         "x": 2,
         "y": 2

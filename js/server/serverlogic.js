@@ -16,11 +16,11 @@ exports.logic = function(io) {
         gravity: [0, 0]
     });
     var startpos = new Array(3, 2);
-    var minions = new Array();
     var turrets = new Array();
+    var minions = new Array();
     serverkarte.karte(world);
-    minions.push(new serverminion.minion(world, startpos[0], startpos[1]));
     turrets.push(new serverturret.turret(world, 4, 5));
+    minions.push(new serverminion.minion(world, startpos[0], startpos[1]));
 
     //////////////////////////////////////////////
     //GAMELOOP
