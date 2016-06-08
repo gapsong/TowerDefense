@@ -6,7 +6,7 @@ exports.turret = function(world, x, y) {
     var tiledsize = settings.tiledsize;
     this.range = settings.towerrange;
     this.enemy = null;
-    this.min;
+    this.min = this.range;
     /////////////////////////////////////////////////////////////
     //bullets
     /////////////////////////////////////////////////////////////
@@ -15,6 +15,7 @@ exports.turret = function(world, x, y) {
         velocity: [0, 0],
         position: [x * tiledsize, y * tiledsize]
     });
+
     this.position = new Array(x, y);
     circleshapebullet = new p2.Circle({
         radius: 10
@@ -25,23 +26,24 @@ exports.turret = function(world, x, y) {
     this.doit = function(minions) {
         var temptower = this.bullet;
         var c;
-
         if (this.enemy == null) { //falls noch kein enemy gefunden wurde
             this.min = this.range; //zurücksetzen von der range<
             for (var i = 0; i < minions.length; i++) {
                 var temp = minions[i].body;
                 c = pythagoras(temp.position, temptower.position);
                 if (c < this.min && c < this.range) {
-                    console.log("in");
+                    console.log(i + " is in");
                     this.enemy = minions[i];
                     this.min = c;
+                    console.log(c);
                 }
             }
         } else {
             c = pythagoras(this.enemy.body.position, temptower.position);
             if (c >= this.range) { //Wenn gegner außerhalb der range ist, dann soll ein neuer gesucht werden
-                this.enemy = null; //gegener zurücksetzen
                 console.log("out");
+                this.enemy = null; //gegener zurücksetzen
+                console.log(c);
             }
         }
     }

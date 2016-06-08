@@ -1,8 +1,7 @@
 var socket = io();
 var par_inc, par_inc2;
-socket.on('update', function(inc, inc2) {
-    par_inc = inc;
-    par_inc2 = inc2;
+socket.on('update', function(minionsArray) {
+    par_inc = minionsArray;
 });
 
 var game = new Phaser.Game(1200, 600, Phaser.AUTO, '', {
@@ -18,7 +17,6 @@ var startpos = new Array(2, 2);
 var enemys = new Array();
 var towers = new Array();
 var tiledsize;
-
 
 function preload() {
     game.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
@@ -46,7 +44,7 @@ function create() {
 
     var graphics = game.add.graphics(0, 0);
     graphics.beginFill(0xFF0000, 1);
-    graphics.drawCircle(4.5 * tiledsize, 5.5 * tiledsize, settings.towerrange);
+    graphics.drawCircle(4.5 * tiledsize, 5.5 * tiledsize, settings.towerrange * 2); //2 ist der durchmesser
     //////////////////////////////////////////////////
     //DECLARATION
     //////////////////////////////////////////////////
@@ -55,11 +53,16 @@ function create() {
 }
 
 function update() {
+    if (par_inc.length != enemys.length) {
+      enemys.push(new minion()); //create minion
+    }
+    console.log(par_inc);
     //sprite bewegung
     for (var k = 0; k < enemys.length; k++) {
-        enemys[k].doit(par_inc);
+        enemys[k].doit(par_inc[k]);
     }
-    turret.doit(par_inc2); //einfach die turrets durch die iteriert wird
+
+    //turret.doit(par_inc2); //einfach die turrets durch die iteriert wird
     //killminion();
 }
 

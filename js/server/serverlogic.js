@@ -21,7 +21,9 @@ exports.logic = function(io) {
     serverkarte.karte(world);
     turrets.push(new serverturret.turret(world, 4, 5));
     minions.push(new serverminion.minion(world, startpos[0], startpos[1]));
-
+    setTimeout(function() {
+        minions.push(new serverminion.minion(world, startpos[0], startpos[1]));
+    }, 1000);
     //////////////////////////////////////////////
     //GAMELOOP
     //////////////////////////////////////////////
@@ -31,15 +33,18 @@ exports.logic = function(io) {
         world.step(timeStep);
         //console.log(minions[0].body.position);
         turrets[0].doit(minions);
-        io.emit('update', minions[0].body.position, turrets[0].bullet.position);
+        console.log(convertMinionArray(minions));
+        io.emit('update', convertMinionArray(minions));
     }, 1000 * timeStep);
 
     world.on("beginContact", function(event) {
-        if (event.bodyB === minions[0].body) {
-            minions[0].move2(event.bodyA.id);
-        }
-        if (event.bodyA === minions[0].body) {
-            minions[0].move2(event.bodyB.id);
+        for (var i = 0; i < minions.length; i++) {
+            if (event.bodyB === minions[i].body) {
+                minions[i].move2(event.bodyA.id);
+            }
+            if (event.bodyA === minions[i].body) {
+                minions[i].move2(event.bodyB.id);
+            }
         }
     });
 }

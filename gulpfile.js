@@ -13,7 +13,7 @@ var paths = {
 gulp.task('develop', function() {
     nodemon({
             script: 'server.js',
-            ext: 'html js',
+            ext: 'html js json',
             ignore: paths.dist + '/**'
         })
         .on('start', ['browserify'])

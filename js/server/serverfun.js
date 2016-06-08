@@ -14,4 +14,12 @@ exports.prefun = function() {
         var temp = delta(a, b);
         return Math.sqrt(Math.pow(temp[0], 2) + Math.pow(temp[1], 2));
     }
+
+    convertMinionArray = function(minions) {
+        var temp = [];
+        for (var i = 0; i < minions.length; i++) {
+            temp.push([Math.round(minions[i].body.position[0] * 10) / 10, Math.round(minions[i].body.position[1] * 10) / 10]);
+        }
+        return temp;
+    }
 }

@@ -18,6 +18,10 @@ exports.minion = function(world, x, y) {
     world.addBody(this.body);
 
     this.move2 = function(richtung) {
+        this.body.position = [
+            Math.round(this.body.position[0] / tiledsize) * tiledsize,
+            Math.round(this.body.position[1] / tiledsize) * tiledsize
+        ]; //diese Methode packt minion nochmal auf die bahn
         switch (richtung) {
             case 17: //rechts
                 this.body.velocity = [speed, 0];
