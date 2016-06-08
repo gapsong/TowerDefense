@@ -12,7 +12,10 @@ exports.karte = function(world) {
         smap[i] = new Array();
         for (j = 0; j < height; j++) {
             smap[i][j] = karte[i + j * height];
-            if (smap[i][j] == 5 || smap[i][j] == 6 || smap[i][j] == 16 || smap[i][j] == 17) {
+            if (smap[i][j] == 5 ||
+                smap[i][j] == 6 ||
+                smap[i][j] == 16 ||
+                smap[i][j] == 17) {
                 richtungsblocks.push(new serverblock.richtungsblock(world, i, j, smap[i][j]));
             }
         }

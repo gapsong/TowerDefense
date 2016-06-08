@@ -1,5 +1,6 @@
 function minion() {
-    this.sprite = game.add.sprite(startpos[0] * tiledsize, startpos[1] * tiledsize, 'mushroom');
+    this.sprite = game.add.sprite(startpos[0] * tiledsize,
+        startpos[1] * tiledsize, 'mushroom');
     //this.game = game;
     //this.sprite.anchor.setTo(0.5);
     this.position = new Array(startpos[0], startpos[1]);

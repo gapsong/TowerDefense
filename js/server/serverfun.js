@@ -1,6 +1,9 @@
 exports.prefun = function() {
     delta = function(a, b) { //delta wird berechnet
-        return [betrag(a[0] - b[0]), betrag(a[1] - b[1])];
+        return [
+            betrag(a[0] - b[0]),
+            betrag(a[1] - b[1])
+        ];
     }
 
     betrag = function(x) {
@@ -18,7 +21,10 @@ exports.prefun = function() {
     convertMinionArray = function(minions) {
         var temp = [];
         for (var i = 0; i < minions.length; i++) {
-            temp.push([Math.round(minions[i].body.position[0] * 10) / 10, Math.round(minions[i].body.position[1] * 10) / 10]);
+            temp.push([
+                Math.round(minions[i].body.position[0] * 10) / 10,
+                Math.round(minions[i].body.position[1] * 10) / 10
+            ]);
         }
         return temp;
     }

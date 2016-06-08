@@ -3,6 +3,7 @@ exports.logic = function(io) {
     var serverminion = require('./serverminions');
     var serverturret = require('./serverturret');
     var serverkarte = require('./serverkarte');
+    var settings = require('../settings.json');
 
     io.on('connection', function(socket) {
         console.log("connected");
@@ -11,7 +12,6 @@ exports.logic = function(io) {
         });
     });
 
-    var tiledsize = 32;
     var world = new p2.World({
         gravity: [0, 0]
     });
@@ -32,8 +32,7 @@ exports.logic = function(io) {
     setInterval(function() {
         world.step(timeStep);
         //console.log(minions[0].body.position);
-        turrets[0].doit(minions);
-        console.log(convertMinionArray(minions));
+        turrets[0].findEnemy(minions);
         io.emit('update', convertMinionArray(minions));
     }, 1000 * timeStep);
 

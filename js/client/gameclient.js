@@ -44,7 +44,8 @@ function create() {
 
     var graphics = game.add.graphics(0, 0);
     graphics.beginFill(0xFF0000, 1);
-    graphics.drawCircle(4.5 * tiledsize, 5.5 * tiledsize, settings.towerrange * 2); //2 ist der durchmesser
+    graphics.drawCircle(4.5 * tiledsize, 5.5 * tiledsize,
+        settings.towerrange * 2); //2 ist der durchmesser
     //////////////////////////////////////////////////
     //DECLARATION
     //////////////////////////////////////////////////
@@ -54,7 +55,7 @@ function create() {
 
 function update() {
     if (par_inc.length != enemys.length) {
-      enemys.push(new minion()); //create minion
+        enemys.push(new minion()); //create minion
     }
     console.log(par_inc);
     //sprite bewegung

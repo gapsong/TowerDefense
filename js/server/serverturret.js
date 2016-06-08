@@ -23,7 +23,7 @@ exports.turret = function(world, x, y) {
     this.bullet.addShape(circleshapebullet);
     world.addBody(this.bullet);
 
-    this.doit = function(minions) {
+    this.findEnemy = function(minions) {
         var temptower = this.bullet;
         var c;
         if (this.enemy == null) { //falls noch kein enemy gefunden wurde
@@ -32,18 +32,14 @@ exports.turret = function(world, x, y) {
                 var temp = minions[i].body;
                 c = pythagoras(temp.position, temptower.position);
                 if (c < this.min && c < this.range) {
-                    console.log(i + " is in");
                     this.enemy = minions[i];
                     this.min = c;
-                    console.log(c);
                 }
             }
         } else {
             c = pythagoras(this.enemy.body.position, temptower.position);
             if (c >= this.range) { //Wenn gegner außerhalb der range ist, dann soll ein neuer gesucht werden
-                console.log("out");
                 this.enemy = null; //gegener zurücksetzen
-                console.log(c);
             }
         }
     }
