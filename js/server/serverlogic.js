@@ -44,10 +44,12 @@ exports.logic = function(io) {
         for (var i = 0; i < minions.length; i++) {
             if ((bodyA.shapes[0].collisionGroup & bodyB.shapes[0].collisionMask) != 0 &&
                 (bodyB.shapes[0].collisionGroup & bodyA.shapes[0].collisionMask) != 0) {
-                if (bodyB.id === minions[i].body.id && bodyB.position === minions[i].body.position) {
+                if (bodyB.id === minions[i].body.id &&
+                    bodyB.position === minions[i].body.position) {
                     minions[i].move2(bodyA.id);
                 } else
-                if (bodyA.id === minions[i].body.id && bodyA.position === minions[i].body.position) {
+                if (bodyA.id === minions[i].body.id &&
+                    bodyA.position === minions[i].body.position) {
                     minions[i].move2(bodyB.id);
                 }
             }

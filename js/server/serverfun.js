@@ -28,4 +28,24 @@ exports.prefun = function() {
         }
         return temp;
     }
+
+    moveMinion = function(body, richtung) { //der body soll richtung verändern und auf ein normales Feld zurückgestzt werden
+        body.position = [
+            Math.round(body.position[0] / tiledsize) * tiledsize,
+            Math.round(body.position[1] / tiledsize) * tiledsize
+        ]; //diese Methode packt minion nochmal auf die bahn
+        switch (richtung) {
+            case 17: //rechts
+                body.velocity = [speed, 0];
+                break;
+            case 16: //runter
+                body.velocity = [0, speed];
+                break;
+            case 6: //hoch
+                body.velocity = [0, -speed];
+                break;
+            case 5: //links
+                body.velocity = [-speed, 0];
+        }
+    }
 }
