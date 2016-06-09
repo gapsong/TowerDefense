@@ -1,24 +1,26 @@
 exports.logic = function(io) {
-    var p2 = require('../../node_modules/p2');
-    var serverminion = require('./serverminions');
-    var serverturret = require('./serverturret');
-    var serverkarte = require('./serverkarte');
-    var settings = require('../settings.json');
-
     io.on('connection', function(socket) {
         console.log("connected");
-        socket.on('spawn_minion', function() {
-            console.log("minion got spawned");
+        socket.on('spawn_minion', function(hi) {
+            minions.push(new serverminion.minion(world, startpos[0], startpos[1]));
         });
     });
+    var p2 = require('../../node_modules/p2'),
+        serverminion = require('./serverminions'),
+        serverturret = require('./serverturret'),
+        serverkarte = require('./serverkarte'),
+        settings = require('../settings.json'),
+        world = new p2.World({
+            gravity: [0, 0]
+        }),
+        startpos = new Array(3, 2),
+        turrets = new Array(),
+        minions = new Array(),
+        richtungsblocks = new Array(),
+        timeStep = 1 / 60; // seconds
 
-    var world = new p2.World({
-        gravity: [0, 0]
-    });
-    var startpos = new Array(3, 2);
-    var turrets = new Array();
-    var minions = new Array();
-    serverkarte.karte(world);
+
+    serverkarte.karte(world, richtungsblocks);
     turrets.push(new serverturret.turret(world, 4, 5));
     minions.push(new serverminion.minion(world, startpos[0], startpos[1]));
     setTimeout(function() {
@@ -27,23 +29,29 @@ exports.logic = function(io) {
     //////////////////////////////////////////////
     //GAMELOOP
     //////////////////////////////////////////////
-
-    var timeStep = 1 / 60; // seconds
     setInterval(function() {
         world.step(timeStep);
         //console.log(minions[0].body.position);
         turrets[0].findEnemy(minions);
+        //console.log(minions.length);
+        //console.log(convertMinionArray(minions));
         io.emit('update', convertMinionArray(minions));
     }, 1000 * timeStep);
 
-    world.on("beginContact", function(event) {
+    world.on("impact", function(event) {
+        var bodyA = event.bodyA,
+            bodyB = event.bodyB;
         for (var i = 0; i < minions.length; i++) {
-            if (event.bodyB === minions[i].body) {
-                minions[i].move2(event.bodyA.id);
+            if ((bodyA.shapes[0].collisionGroup & bodyB.shapes[0].collisionMask) != 0 &&
+                (bodyB.shapes[0].collisionGroup & bodyA.shapes[0].collisionMask) != 0) {
+                if (bodyB.id === minions[i].body.id && bodyB.position === minions[i].body.position) {
+                    minions[i].move2(bodyA.id);
+                } else
+                if (bodyA.id === minions[i].body.id && bodyA.position === minions[i].body.position) {
+                    minions[i].move2(bodyB.id);
+                }
             }
-            if (event.bodyA === minions[i].body) {
-                minions[i].move2(event.bodyB.id);
-            }
+
         }
     });
 }

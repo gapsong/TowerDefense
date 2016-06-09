@@ -1,9 +1,13 @@
 {
     "tiledsize": 32,
-    "speed": 100,
+    "speed": 200,
     "towerrange": 100,
     "startposition": {
         "x": 2,
         "y": 2
-    }
+    },
+    "MINION": 2,
+    "TURRET": 4,
+    "BLOCK": 8
+
 }

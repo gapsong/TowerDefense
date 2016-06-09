@@ -3,10 +3,13 @@ exports.turret = function(world, x, y) {
     var settings = require('../settings.json');
     var serverfun = require('./serverfun');
     serverfun.prefun();
-    var tiledsize = settings.tiledsize;
+    var tiledsize = settings.tiledsize,
+        TURRET = settings.TURRET;
     this.range = settings.towerrange;
     this.enemy = null;
     this.min = this.range;
+
+
     /////////////////////////////////////////////////////////////
     //bullets
     /////////////////////////////////////////////////////////////
@@ -16,11 +19,14 @@ exports.turret = function(world, x, y) {
         position: [x * tiledsize, y * tiledsize]
     });
 
+
     this.position = new Array(x, y);
     circleshapebullet = new p2.Circle({
         radius: 10
     });
     this.bullet.addShape(circleshapebullet);
+    circleshapebullet.collisionGroup = settings.TURRET;
+    circleshapebullet.collisionMask = settings.MINION;
     world.addBody(this.bullet);
 
     this.findEnemy = function(minions) {

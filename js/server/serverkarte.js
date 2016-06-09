@@ -1,4 +1,4 @@
-exports.karte = function(world) {
+exports.karte = function(world, richtungsblocks) {
     var karteJSON = require('../../assets/super_mario.json');
     var serverblock = require('./serverblock');
     //console.log(karteJSON.layers[0].height);
@@ -6,7 +6,6 @@ exports.karte = function(world) {
     width = karteJSON.layers[0].width
     karte = karteJSON.layers[0].data
         //console.log(karte);
-    var richtungsblocks = new Array();
     smap = new Array()
     for (i = 0; i < width; i++) {
         smap[i] = new Array();

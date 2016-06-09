@@ -1,5 +1,6 @@
 var socket = io();
 var par_inc, par_inc2;
+
 socket.on('update', function(minionsArray) {
     par_inc = minionsArray;
 });
@@ -10,13 +11,10 @@ var game = new Phaser.Game(1200, 600, Phaser.AUTO, '', {
     update: update
 });
 
-var map;
-var layer;
-var level;
-var startpos = new Array(2, 2);
-var enemys = new Array();
-var towers = new Array();
-var tiledsize;
+var map, layer, level, startpos = new Array(2, 2),
+    enemys = new Array(),
+    towers = new Array(),
+    tiledsize;
 
 function preload() {
     game.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
@@ -54,10 +52,12 @@ function create() {
 }
 
 function update() {
+    if (game.input.activePointer.leftButton.isDown) {
+        socket.emit('spawn_minion', 12);
+    }
     if (par_inc.length != enemys.length) {
         enemys.push(new minion()); //create minion
     }
-    console.log(par_inc);
     //sprite bewegung
     for (var k = 0; k < enemys.length; k++) {
         enemys[k].doit(par_inc[k]);

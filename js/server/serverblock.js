@@ -12,6 +12,9 @@ exports.richtungsblock = function(world, x, y, fieldnum) { //fieldnum ist die ID
         width: tiledsize,
         height: tiledsize
     });
+
     this.body.addShape(boxShape);
+    boxShape.collisionGroup = settings.BLOCK;
+    boxShape.collisionMask = settings.MINION;
     world.addBody(this.body);
 }
