@@ -23,9 +23,6 @@ exports.logic = function(io) {
     serverkarte.karte(world, richtungsblocks);
     turrets.push(new serverturret.turret(world, 4, 5));
     minions.push(new serverminion.minion(world, startpos[0], startpos[1]));
-    setTimeout(function() {
-        minions.push(new serverminion.minion(world, startpos[0], startpos[1]));
-    }, 1000);
     //////////////////////////////////////////////
     //GAMELOOP
     //////////////////////////////////////////////
@@ -33,7 +30,7 @@ exports.logic = function(io) {
         world.step(timeStep);
         //console.log(minions[0].body.position);
         turrets[0].findEnemy(minions);
-        //console.log(minions.length);
+        console.log(minions.length);
         //console.log(convertMinionArray(minions));
         io.emit('update', convertMinionArray(minions));
     }, 1000 * timeStep);
@@ -41,19 +38,18 @@ exports.logic = function(io) {
     world.on("impact", function(event) {
         var bodyA = event.bodyA,
             bodyB = event.bodyB;
-        for (var i = 0; i < minions.length; i++) {
+        for (var i = 0; i < richtungsblocks.length; i++) {
             if ((bodyA.shapes[0].collisionGroup & bodyB.shapes[0].collisionMask) != 0 &&
                 (bodyB.shapes[0].collisionGroup & bodyA.shapes[0].collisionMask) != 0) {
-                if (bodyB.id === minions[i].body.id &&
-                    bodyB.position === minions[i].body.position) {
-                    minions[i].move2(bodyA.id);
+                if (bodyB.id === richtungsblocks[i].body.id &&
+                    bodyB.position === richtungsblocks[i].body.position) {
+                    moveMinion([bodyA], bodyB.id);
                 } else
-                if (bodyA.id === minions[i].body.id &&
-                    bodyA.position === minions[i].body.position) {
-                    minions[i].move2(bodyB.id);
+                if (bodyA.id === richtungsblocks[i].body.id &&
+                    bodyA.position === richtungsblocks[i].body.position) {
+                    moveMinion([bodyB], bodyB.id);
                 }
             }
-
         }
     });
 }

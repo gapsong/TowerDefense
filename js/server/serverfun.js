@@ -1,4 +1,5 @@
 exports.prefun = function() {
+
     delta = function(a, b) { //delta wird berechnet
         return [
             betrag(a[0] - b[0]),
@@ -29,23 +30,29 @@ exports.prefun = function() {
         return temp;
     }
 
-    moveMinion = function(body, richtung) { //der body soll richtung verändern und auf ein normales Feld zurückgestzt werden
-        body.position = [
-            Math.round(body.position[0] / tiledsize) * tiledsize,
-            Math.round(body.position[1] / tiledsize) * tiledsize
+
+    var settings = require('../settings.json'),
+        tiledsize = settings.tiledsize,
+        speed = settings.speed;
+
+    moveMinion = function(bodypointer, richtung) { //der body soll richtung verändern und auf ein normales Feld zurückgestzt werden
+        //how to call by refernce nachgucken
+        bodypointer[0].position = [
+            Math.round(bodypointer[0].position[0] / tiledsize) * tiledsize,
+            Math.round(bodypointer[0].position[1] / tiledsize) * tiledsize
         ]; //diese Methode packt minion nochmal auf die bahn
         switch (richtung) {
             case 17: //rechts
-                body.velocity = [speed, 0];
+                bodypointer[0].velocity = [speed, 0];
                 break;
             case 16: //runter
-                body.velocity = [0, speed];
+                bodypointer[0].velocity = [0, speed];
                 break;
             case 6: //hoch
-                body.velocity = [0, -speed];
+                bodypointer[0].velocity = [0, -speed];
                 break;
             case 5: //links
-                body.velocity = [-speed, 0];
+                bodypointer[0].velocity = [-speed, 0];
         }
     }
 }
