@@ -9,7 +9,6 @@ exports.logic = function(io) {
         serverminion = require('./serverminions'),
         serverturret = require('./serverturret'),
         serverkarte = require('./serverkarte'),
-        settings = require('../settings.json'),
         world = new p2.World({
             gravity: [0, 0]
         }),
@@ -30,7 +29,7 @@ exports.logic = function(io) {
         world.step(timeStep);
         //console.log(minions[0].body.position);
         turrets[0].findEnemy(minions);
-        console.log(minions.length);
+        //console.log(minions.length);
         //console.log(convertMinionArray(minions));
         io.emit('update', convertMinionArray(minions));
     }, 1000 * timeStep);

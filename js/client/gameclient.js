@@ -14,7 +14,7 @@ var game = new Phaser.Game(1200, 600, Phaser.AUTO, '', {
 var map, layer, level, startpos = new Array(2, 2),
     enemys = new Array(),
     towers = new Array(),
-    tiledsize;
+    TILEDSIZE;
 
 function preload() {
     game.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
@@ -30,8 +30,8 @@ function preload() {
 
 function create() {
     var settings = game.cache.getJSON('settings');
-    tiledsize = settings.tiledsize;
-    console.log(tiledsize);
+    TILEDSIZE = settings.TILEDSIZE;
+    console.log(TILEDSIZE);
     game.stage.backgroundColor = '#787878';
     map = game.add.tilemap('karte');
     map.addTilesetImage('SuperMarioBros-World1-1', 'tiles');
@@ -42,7 +42,7 @@ function create() {
 
     var graphics = game.add.graphics(0, 0);
     graphics.beginFill(0xFF0000, 1);
-    graphics.drawCircle(4.5 * tiledsize, 5.5 * tiledsize,
+    graphics.drawCircle(4.5 * TILEDSIZE, 5.5 * TILEDSIZE,
         settings.towerrange * 2); //2 ist der durchmesser
     //////////////////////////////////////////////////
     //DECLARATION

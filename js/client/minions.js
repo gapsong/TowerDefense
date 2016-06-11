@@ -1,6 +1,6 @@
 function minion() {
-    this.sprite = game.add.sprite(startpos[0] * tiledsize,
-        startpos[1] * tiledsize, 'mushroom');
+    this.sprite = game.add.sprite(startpos[0] * TILEDSIZE,
+        startpos[1] * TILEDSIZE, 'mushroom');
     //this.game = game;
     //this.sprite.anchor.setTo(0.5);
     this.position = new Array(startpos[0], startpos[1]);
@@ -13,7 +13,7 @@ function minion() {
     }
 
     this.move = function() {
-        if ((this.sprite.x + this.sprite.y) % tiledsize == 0) {
+        if ((this.sprite.x + this.sprite.y) % TILEDSIZE == 0) {
             this.richtung = level[this.position[0]][this.position[1]];
             this.richtungswechsel();
         }

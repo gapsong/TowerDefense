@@ -1,20 +1,20 @@
 exports.richtungsblock = function(world, x, y, fieldnum) { //fieldnum ist die ID des Feldes, damit man weiß in welche richtung es geht
-    var settings = require('../settings.json');
     var p2 = require('../../node_modules/p2');
-    var tiledsize = settings.tiledsize;
+    var preload = require('./serverpreload');
+    preload.preload1();
 
     this.body = new p2.Body({
-        position: [x * tiledsize, y * tiledsize],
+        position: [x * TILEDSIZE, y * TILEDSIZE],
         id: fieldnum
     });
 
     var boxShape = new p2.Box({
-        width: tiledsize,
-        height: tiledsize
+        width: TILEDSIZE,
+        height: TILEDSIZE
     });
 
     this.body.addShape(boxShape);
-    boxShape.collisionGroup = settings.BLOCK;
-    boxShape.collisionMask = settings.MINION;
+    boxShape.collisionGroup = BLOCK;
+    boxShape.collisionMask = MINION;
     world.addBody(this.body);
 }
