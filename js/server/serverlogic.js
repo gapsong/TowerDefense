@@ -4,6 +4,9 @@ exports.logic = function(io) {
         socket.on('spawn_minion', function(hi) {
             minions.push(new serverminion.minion(world, startpos[0], startpos[1]));
         });
+        socket.on('shoot', function(){
+          turrets[0].shoot();
+        });
     });
     var p2 = require('../../node_modules/p2'),
         serverfun = require('./serverfun'),
@@ -33,7 +36,7 @@ exports.logic = function(io) {
         turrets[0].findEnemy(minions);
         //console.log(minions.length);
         //console.log(convertMinionArray(minions));
-        io.emit('update', convertMinionArray(minions));
+        io.emit('update', convertMinionArray(minions), convertBulletArray(turrets));
     }, 1000 * timeStep);
 
     world.on("impact", function(event) {

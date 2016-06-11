@@ -8,6 +8,6 @@
     },
     "MINION": 2,
     "TURRET": 4,
-    "BLOCK": 8
-
+    "BLOCK": 8,
+    "COOLDOWN": 100
 }

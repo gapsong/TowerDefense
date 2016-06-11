@@ -6,7 +6,7 @@ exports.minion = function(world, x, y) {
 
     this.body = new p2.Body({
         mass: 5,
-        velocity: [0, 100],
+        velocity: [0, SPEED],
         position: [x * TILEDSIZE, y * TILEDSIZE]
     });
 

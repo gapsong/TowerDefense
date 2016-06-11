@@ -32,6 +32,17 @@ exports.prefun = function() {
         return temp;
     }
 
+    convertBulletArray = function(bullets) {
+        var temp = [];
+        for (var i = 0; i < bullets.length; i++) {
+            temp.push([
+                Math.round(bullets[i].bullet.position[0] * 10) / 10,
+                Math.round(bullets[i].bullet.position[1] * 10) / 10
+            ]);
+        }
+        return temp;
+    }
+
     moveMinion = function(bodypointer, richtung) { //der body soll richtung verändern und auf ein normales Feld zurückgestzt werden
         //how to call by refernce nachgucken
         bodypointer[0].position = [

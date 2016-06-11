@@ -1,9 +1,11 @@
 var socket = io();
 var par_inc, par_inc2;
 
-socket.on('update', function(minionsArray) {
+socket.on('update', function(minionsArray, turretsArray) {
     par_inc = minionsArray;
+    par_inc2 = turretsArray;
 });
+
 
 var game = new Phaser.Game(1200, 600, Phaser.AUTO, '', {
     preload: preload,
@@ -29,9 +31,11 @@ function preload() {
 }
 
 function create() {
+    game.canvas.oncontextmenu = function(e) {
+            e.preventDefault();
+        } //Damit wird der rechtsklick blockiert also das pop up Fenster
     var settings = game.cache.getJSON('settings');
     TILEDSIZE = settings.TILEDSIZE;
-    console.log(TILEDSIZE);
     game.stage.backgroundColor = '#787878';
     map = game.add.tilemap('karte');
     map.addTilesetImage('SuperMarioBros-World1-1', 'tiles');
@@ -53,7 +57,10 @@ function create() {
 
 function update() {
     if (game.input.activePointer.leftButton.isDown) {
-        socket.emit('spawn_minion', 12);
+        socket.emit('spawn_minion', 0);
+    }
+    if (game.input.activePointer.rightButton.isDown) {
+        socket.emit('shoot', 0);
     }
     if (par_inc.length != enemys.length) {
         enemys.push(new minion()); //create minion
@@ -62,6 +69,7 @@ function update() {
     for (var k = 0; k < enemys.length; k++) {
         enemys[k].doit(par_inc[k]);
     }
+//    turret.doit(par_inc2);
 
     //turret.doit(par_inc2); //einfach die turrets durch die iteriert wird
     //killminion();

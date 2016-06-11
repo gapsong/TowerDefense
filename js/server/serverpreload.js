@@ -6,4 +6,5 @@ exports.preload1 = function() {
     TURRET = settings.TURRET
     BLOCK = settings.BLOCK
     MINION = settings.MINION
+    COOLDOWN = settings.COOLDOWN
 }
