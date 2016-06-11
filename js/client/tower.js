@@ -1,5 +1,5 @@
 function tower(x, y) {
-    this.position = new Array(x * tiledsize, y * tiledsize); //Arrayposition
+    this.position = new Array(x * TILEDSIZE, y * TILEDSIZE); //Arrayposition
     this.sprite = game.add.sprite(this.position[0], this.position[1], 'mushroom');
 
     this.doit = function(inco){
