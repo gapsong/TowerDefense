@@ -50,9 +50,10 @@ exports.turret = function(world, x, y) {
 
     this.shoot = function() {
         if (this.enemy != null) {
-            d = delta(this.enemy.body.position, this.position);
-            var winkel = Math.atan2(d[0], d[1]);
-            this.bullet.velocity = [SPEED * Math.cos(winkel), SPEED * Math.sin(winkel)];
+            var dx = this.enemy.body.position[0] - this.position[0];
+            var dy = this.enemy.body.position[1] - this.position[1];
+            var winkel = Math.atan2(dy, dx);
+            this.bullet.velocity = [5 * SPEED * Math.cos(winkel), 5 * SPEED * Math.sin(winkel)];
         }
     }
 }

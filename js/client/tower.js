@@ -5,6 +5,5 @@ function tower(x, y) {
     this.doit = function(temp) {
         this.sprite.x = temp[0];
         this.sprite.y = temp[1];
-
     }
 }

@@ -19,6 +19,9 @@ var map, layer, level, startpos = new Array(2, 2),
     TILEDSIZE;
 
 function preload() {
+    game.canvas.oncontextmenu = function(e) {
+            e.preventDefault();
+        } //Damit wird der rechtsklick blockiert also das pop up Fenster
     game.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
     game.scale.pageAlignHorizontally = true;
     //game.scale.pageAlignVertically = true;
@@ -31,9 +34,6 @@ function preload() {
 }
 
 function create() {
-    game.canvas.oncontextmenu = function(e) {
-            e.preventDefault();
-        } //Damit wird der rechtsklick blockiert also das pop up Fenster
     var settings = game.cache.getJSON('settings');
     TILEDSIZE = settings.TILEDSIZE;
     game.stage.backgroundColor = '#787878';
@@ -69,7 +69,7 @@ function update() {
     for (var k = 0; k < enemys.length; k++) {
         enemys[k].doit(par_inc[k]);
     }
-//    turret.doit(par_inc2);
+    turret.doit(par_inc2[0]);
 
     //turret.doit(par_inc2); //einfach die turrets durch die iteriert wird
     //killminion();
