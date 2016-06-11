@@ -1,10 +1,7 @@
 exports.turret = function(world, x, y) {
     var p2 = require('../../node_modules/p2');
-    var serverfun = require('./serverfun');
     var preload = require('./serverpreload');
     preload.preload1();
-
-    serverfun.prefun();
     this.range = RANGE;
     this.enemy = null;
     this.min = this.range;

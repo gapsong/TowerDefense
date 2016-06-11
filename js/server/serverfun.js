@@ -52,4 +52,5 @@ exports.prefun = function() {
                 bodypointer[0].velocity = [-SPEED, 0];
         }
     }
+
 }

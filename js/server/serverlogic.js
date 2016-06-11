@@ -6,9 +6,11 @@ exports.logic = function(io) {
         });
     });
     var p2 = require('../../node_modules/p2'),
+        serverfun = require('./serverfun'),
         serverminion = require('./serverminions'),
         serverturret = require('./serverturret'),
         serverkarte = require('./serverkarte'),
+        preload = require('./serverpreload'),
         world = new p2.World({
             gravity: [0, 0]
         }),
@@ -18,7 +20,7 @@ exports.logic = function(io) {
         richtungsblocks = new Array(),
         timeStep = 1 / 60; // seconds
 
-
+    serverfun.prefun();
     serverkarte.karte(world, richtungsblocks);
     turrets.push(new serverturret.turret(world, 4, 5));
     minions.push(new serverminion.minion(world, startpos[0], startpos[1]));
