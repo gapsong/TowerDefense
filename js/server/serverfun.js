@@ -64,4 +64,8 @@ exports.prefun = function() {
         }
     }
 
+    shootMinion = function() {
+        
+    }
+
 }

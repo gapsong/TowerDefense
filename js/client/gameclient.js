@@ -15,8 +15,7 @@ var game = new Phaser.Game(1200, 600, Phaser.AUTO, '', {
 
 var map, layer, level, startpos = new Array(2, 2),
     enemys = new Array(),
-    towers = new Array(),
-    TILEDSIZE;
+    towers = new Array();
 
 function preload() {
     game.canvas.oncontextmenu = function(e) {

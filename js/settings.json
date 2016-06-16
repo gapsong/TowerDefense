@@ -1,7 +1,7 @@
 {
     "TILEDSIZE": 32,
     "SPEED": 200,
-    "RANGE": 100,
+    "RANGE": 500,
     "startposition": {
         "x": 2,
         "y": 2

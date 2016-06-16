@@ -1,7 +1,7 @@
 exports.turret = function(world, x, y) {
-    var p2 = require('../../node_modules/p2');
-    var serverfun = require('./serverfun');
-    var preload = require('./serverpreload');
+    var p2 = require('../../node_modules/p2'),
+        serverfun = require('./serverfun'),
+        preload = require('./serverpreload');
     serverfun.prefun();
     preload.preload1();
     this.range = RANGE;
@@ -50,10 +50,11 @@ exports.turret = function(world, x, y) {
 
     this.shoot = function() {
         if (this.enemy != null) {
-            var dx = this.enemy.body.position[0] - this.position[0];
-            var dy = this.enemy.body.position[1] - this.position[1];
-            var winkel = Math.atan2(dy, dx);
-            this.bullet.velocity = [5 * SPEED * Math.cos(winkel), 5 * SPEED * Math.sin(winkel)];
+            var temp = this.enemy.body,
+                dx = temp.position[0] - this.position[0],
+                dy = temp.position[1] - this.position[1],
+                winkel = Math.atan2(dy, dx);
+            this.bullet.velocity = [2 * SPEED * Math.cos(winkel), 2 * SPEED * Math.sin(winkel)];
         }
     }
 }
