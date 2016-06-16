@@ -7,4 +7,5 @@ exports.preload1 = function() {
     BLOCK = settings.BLOCK
     MINION = settings.MINION
     COOLDOWN = settings.COOLDOWN
+    BULLETSPEED = settings.BULLETSPEED
 }

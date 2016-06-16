@@ -8,7 +8,7 @@ exports.turret = function(world, x, y) {
     this.enemy = null;
     this.min = this.range;
     this.position = new Array(x * TILEDSIZE, y * TILEDSIZE);
-    this.cooldown = COOLDOWN;
+    this.timer = getTime();
 
     /////////////////////////////////////////////////////////////
     //bullets
@@ -22,10 +22,15 @@ exports.turret = function(world, x, y) {
     circleshapebullet = new p2.Circle({
         radius: 10
     });
+    
     this.bullet.addShape(circleshapebullet);
     circleshapebullet.collisionGroup = TURRET;
     circleshapebullet.collisionMask = MINION;
     world.addBody(this.bullet);
+
+    this.doit = function(minions) {
+        this.findEnemy(minions);
+    }
 
     this.findEnemy = function(minions) {
         //var temptower = this.position;
@@ -45,16 +50,25 @@ exports.turret = function(world, x, y) {
             if (c >= this.range) { //Wenn gegner außerhalb der range ist, dann soll ein neuer gesucht werden
                 this.enemy = null; //gegener zurücksetzen
             }
+            this.shoot();
         }
     }
 
     this.shoot = function() {
+        if (this.timer + COOLDOWN <= getTime()) {
+            this.timer = getTime();
+            this.bullet.position = [x * TILEDSIZE, y * TILEDSIZE];
+            this.moveToPosition();
+        }
+    }
+
+    this.moveToPosition = function() {
         if (this.enemy != null) {
             var temp = this.enemy.body,
                 dx = temp.position[0] - this.position[0],
                 dy = temp.position[1] - this.position[1],
                 winkel = Math.atan2(dy, dx);
-            this.bullet.velocity = [2 * SPEED * Math.cos(winkel), 2 * SPEED * Math.sin(winkel)];
+            this.bullet.velocity = [BULLETSPEED * Math.cos(winkel), BULLETSPEED * Math.sin(winkel)];
         }
     }
 }

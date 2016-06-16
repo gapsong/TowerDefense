@@ -32,10 +32,7 @@ exports.logic = function(io) {
     //////////////////////////////////////////////
     setInterval(function() {
         world.step(1 / 60);
-        //console.log(minions[0].body.position);
-        turrets[0].findEnemy(minions);
-        console.log(minions.length);
-        //console.log(convertMinionArray(minions));
+        turrets[0].doit(minions);
         io.emit('update', convertMinionArray(minions), convertBulletArray(turrets));
     }, 1000 * timeStep);
 

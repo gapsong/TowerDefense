@@ -64,8 +64,9 @@ exports.prefun = function() {
         }
     }
 
-    shootMinion = function() {
-        
+    getTime = function() {
+        var d = new Date();
+        return d.getTime();
     }
 
 }

@@ -1,7 +1,7 @@
 {
     "TILEDSIZE": 32,
     "SPEED": 200,
-    "RANGE": 500,
+    "RANGE": 200,
     "startposition": {
         "x": 2,
         "y": 2
@@ -9,5 +9,6 @@
     "MINION": 2,
     "TURRET": 4,
     "BLOCK": 8,
-    "COOLDOWN": 100
+    "COOLDOWN": 1000,
+    "BULLETSPEED": 1000
 }

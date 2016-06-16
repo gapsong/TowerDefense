@@ -27,10 +27,12 @@ function preload() {
     game.stage.backgroundColor = '#fee';
     game.load.tilemap('karte', 'assets/super_mario.json', null, Phaser.Tilemap.TILED_JSON);
     game.load.image('tiles', 'assets/super_mario.png');
+    game.load.image('turret', 'assets/sprites/turret.png');
     game.load.image('mushroom', 'assets/sprites/add.png');
     game.load.image('bullet', 'assets/sprites/bullet.png');
     game.load.json('settings', 'js/settings.json');
 }
+
 
 function create() {
     var settings = game.cache.getJSON('settings');
@@ -47,9 +49,9 @@ function create() {
     graphics.beginFill(0xFF0000, 1);
     graphics.drawCircle(4.5 * TILEDSIZE, 5.5 * TILEDSIZE,
         settings.towerrange * 2); //2 ist der durchmesser
-    //////////////////////////////////////////////////
-    //DECLARATION
-    //////////////////////////////////////////////////
+    /**                             **\
+                DECLARATION
+    \**                             **/
     enemys.push(new minion()); //create minion
     turret = new tower(4, 5);
 }
