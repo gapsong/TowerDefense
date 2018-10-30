@@ -1,3 +1,9 @@
 # TowerDefense
 
-1 Developer 1 Game
+Fun project  
+
+# Goals:
+Learn Javascript basics.  
+
+# Description: 
+The game is a towerdefense game using Phaser.io
